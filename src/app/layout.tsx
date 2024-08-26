@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Layout from "./components/Layout";
-import RecaptchaLoader from "./components/RecaptchaLoader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +19,6 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${inter.className} w-full`}>
-        <RecaptchaLoader />
         <Layout>{children}</Layout>
       </body>
     </html>

@@ -14,5 +14,5 @@ export default function RecaptchaLoader() {
     };
   }, []);
 
-  return null; 
+  return null;
 }

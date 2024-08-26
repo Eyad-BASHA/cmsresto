@@ -6,6 +6,7 @@ import { UserRegister } from "@/types/types";
 import styles from "./LoginModal.module.css";
 import Image from "next/image";
 // import ReCAPTCHA from "@/react-google-recaptcha";
+import RecaptchaLoader from "./RecaptchaLoader";
 
 export default function RegisterModal() {
   const [recaptchaToken, setRecaptchaToken] = useState('');
@@ -205,6 +206,7 @@ export default function RegisterModal() {
 
   return (
     <div>
+      <RecaptchaLoader />
       <button onClick={handleOpenModal} className={styles.registerButton}>
         Register
       </button>
