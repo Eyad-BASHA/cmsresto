@@ -1,4 +1,7 @@
+"use client";
+
 import type { Metadata } from "next";
+import { useEffect } from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Layout from "./components/Layout";
