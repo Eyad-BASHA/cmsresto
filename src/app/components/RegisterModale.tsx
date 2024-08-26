@@ -1,15 +1,14 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UserRegister } from "@/types/types";
-// import styles from "./RegisterModale.module.css";
 import styles from "./LoginModal.module.css";
 import Image from "next/image";
-// import ReCAPTCHA from "@/react-google-recaptcha";
-import RecaptchaLoader from "./RecaptchaLoader";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function RegisterModal() {
-  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState<string>("");
   const router = useRouter();
   const [roles, setRoles] = useState<{ id: number; name: string }[]>([]);
 
@@ -37,17 +36,26 @@ export default function RegisterModal() {
     is_superuser: false,
   });
 
-
   const [errors, setErrors] = useState<Partial<UserRegister>>({});
   const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return null;
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/user/roles/")
+    fetch("/api/user/roles/")
       .then((res) => res.json())
-      .then((data) => {
-        setRoles(data);
-      })
+      .then((data) => setRoles(data))
       .catch((error) => console.error("Error fetching roles:", error));
   }, []);
 
@@ -56,145 +64,106 @@ export default function RegisterModal() {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     const newErrors: Partial<UserRegister> = {};
 
-        if (!user.email || !emailRegex.test(user.email)) {
-          newErrors.email = "Invalid email address";
-        }
-        if (!user.username) {
-          newErrors.username = "Username is required";
-        }
-        if (!user.password || !passwordRegex.test(user.password)) {
-          newErrors.password =
-            "Password must be at least 8 characters long and contain both letters and numbers";
-        }
-        if (user.password !== user.confirmPassword) {
-          newErrors.confirmPassword = "Passwords do not match";
-        }
-        if (!user.first_name) {
-          newErrors.first_name = "First name is required";
-        }
-        if (!user.last_name) {
-          newErrors.last_name = "Last name is required";
-        }
-        if (!user.gender) {
-          newErrors.gender = "Gender is required";
-        }
-        if (!user.phone_number) {
-          newErrors.phone_number = "Phone number is required";
-        }
-        if (!user.date_of_birth) {
-          newErrors.date_of_birth = "Date of birth is required";
-        }
-        if (!user.address.address_type) {
-          user.address.address_type = "livraison";
-        }
-        if (!user.address.street) {
-          newErrors.address = {
-            ...newErrors.address,
-            street: "Street is required",
-          };
-        }
-        if (!user.address.city) {
-          newErrors.address = {
-            ...newErrors.address,
-            city: "City is required",
-          };
-        }
-        if (!user.address.zip_code) {
-          newErrors.address = {
-            ...newErrors.address,
-            zip_code: "ZIP code is required",
-          };
-        }
-        if (!user.address.country) {
-          newErrors.address = {
-            ...newErrors.address,
-            country: "Country is required",
-          };
-        }
-        if (!user.address.address_type) {
-          newErrors.address = {
-            ...newErrors.address,
-            address_type: "Address type is required",
-          };
-        }
+    if (!user.email || !emailRegex.test(user.email))
+      newErrors.email = "Invalid email address";
+    if (!user.username) newErrors.username = "Username is required";
+    if (!user.password || !passwordRegex.test(user.password))
+      newErrors.password =
+        "Password must be at least 8 characters long and contain both letters and numbers";
+    if (user.password !== user.confirmPassword)
+      newErrors.confirmPassword = "Passwords do not match";
+    if (!user.first_name) newErrors.first_name = "First name is required";
+    if (!user.last_name) newErrors.last_name = "Last name is required";
+    if (!user.gender) newErrors.gender = "Gender is required";
+    if (!user.phone_number) newErrors.phone_number = "Phone number is required";
+    if (!user.date_of_birth)
+      newErrors.date_of_birth = "Date of birth is required";
+    if (!user.address.street)
+      newErrors.address = {
+        ...newErrors.address,
+        street: "Street is required",
+      };
+    if (!user.address.city)
+      newErrors.address = { ...newErrors.address, city: "City is required" };
+    if (!user.address.zip_code)
+      newErrors.address = {
+        ...newErrors.address,
+        zip_code: "ZIP code is required",
+      };
+    if (!user.address.country)
+      newErrors.address = {
+        ...newErrors.address,
+        country: "Country is required",
+      };
 
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-    const handleChange = (
-      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    ) => {
-      const { name, value } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
 
-      if (name === "roles" && e.target instanceof HTMLSelectElement) {
-        const selectedRoles = Array.from(
-          e.target.selectedOptions,
-          (option: HTMLOptionElement) => parseInt(option.value),
-        );
-        setUser((prevUser) => ({
-          ...prevUser,
-          roles: selectedRoles as number[], // Assurez-vous que c'est un tableau de nombres
-        }));
-      } else if (name in user.address) {
-        setUser((prevUser) => ({
-          ...prevUser,
-          address: {
-            ...prevUser.address,
-            [name]: value,
-          },
-        }));
-      } else {
-        setUser((prevUser) => ({
-          ...prevUser,
-          [name]: value,
-        }));
-      }
-    };
+    if (name === "roles" && e.target instanceof HTMLSelectElement) {
+      const selectedRoles = Array.from(
+        e.target.selectedOptions,
+        (option: HTMLOptionElement) => parseInt(option.value),
+      );
+      setUser((prevUser) => ({
+        ...prevUser,
+        roles: selectedRoles as number[],
+      }));
+    } else if (name in user.address) {
+      setUser((prevUser) => ({
+        ...prevUser,
+        address: { ...prevUser.address, [name]: value },
+      }));
+    } else {
+      setUser((prevUser) => ({ ...prevUser, [name]: value }));
+    }
+  };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!validate()) return;
-      // console.log("$$$$$$$$$$$$$$$$$ DATA SEND :", JSON.stringify(user));
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
 
-        
     try {
-        const token = await grecaptcha.enterprise.execute(
-            process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-            { action: 'submit' }
-          );
-          setRecaptchaToken(token);
+      const token = await grecaptcha.enterprise.execute(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+        { action: "submit" },
+      );
+      setRecaptchaToken(token);
 
-        const dataToSend = {
-          ...user,
-          profile: {
-            gender: user.gender,
-            phone_number: user.phone_number,
-            bio: user.bio,
-            date_of_birth: user.date_of_birth,
-            addresses: [user.address],
-          },
-          recaptcha_token: token,
-        };
-        const res = await fetch("http://localhost:8000/api/user/create/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        });
+      const dataToSend = {
+        ...user,
+        profile: {
+          gender: user.gender,
+          phone_number: user.phone_number,
+          bio: user.bio,
+          date_of_birth: user.date_of_birth,
+          addresses: [user.address],
+        },
+        recaptcha_token: token,
+      };
 
-        if (!res.ok) {
-          const errorText = await res.text(); // Obtenez la réponse brute en texte
-          console.error("Registration failed:", errorText);
-        } else {
-          console.log("User registered successfully");
-          router.push("/");
-        }
-      } catch (error) {
-        console.error("An error occurred:", error);
+      const res = await fetch("/api/user/create/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataToSend),
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error("Registration failed:", errorText);
+      } else {
+        console.log("User registered successfully");
+        router.push("/");
       }
-    };
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -206,7 +175,6 @@ export default function RegisterModal() {
 
   return (
     <div>
-      <RecaptchaLoader />
       <button onClick={handleOpenModal} className={styles.registerButton}>
         Register
       </button>
@@ -229,7 +197,7 @@ export default function RegisterModal() {
             <form
               onSubmit={handleSubmit}
               className={`flex flex-col items-center ${styles.loginForm}`}>
-              <h2>S'inscrir</h2>
+              <h2>S'inscrire</h2>
               <input
                 type="text"
                 name="first_name"
@@ -237,8 +205,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="First Name"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.first_name ? "border-red-500" : "border-green-500")
+                  errors.first_name ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.first_name && (
@@ -252,8 +219,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Last Name"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.last_name ? "border-red-500" : "border-green-500")
+                  errors.last_name ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.last_name && (
@@ -267,8 +233,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Email"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.email ? "border-red-500" : "border-green-500")
+                  errors.email ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.email && <p className="text-red-500">{errors.email}</p>}
@@ -280,8 +245,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Username"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.username ? "border-red-500" : "border-green-500")
+                  errors.username ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.username && (
@@ -295,8 +259,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Password"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.password ? "border-red-500" : "border-green-500")
+                  errors.password ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.password && (
@@ -310,10 +273,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Confirm Password"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.confirmPassword
-                    ? "border-red-500"
-                    : "border-green-500")
+                  errors.confirmPassword ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.confirmPassword && (
@@ -341,8 +301,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Phone Number"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.phone_number ? "border-red-500" : "border-green-500")
+                  errors.phone_number ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.phone_number && (
@@ -356,8 +315,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Date of Birth"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.date_of_birth ? "border-red-500" : "border-green-500")
+                  errors.date_of_birth ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.date_of_birth && (
@@ -371,8 +329,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Bio"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.bio ? "border-red-500" : "border-green-500")
+                  errors.bio ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.bio && <p className="text-red-500">{errors.bio}</p>}
@@ -384,10 +341,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Street"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.address?.street
-                    ? "border-red-500"
-                    : "border-green-500")
+                  errors.address?.street ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.address?.street && (
@@ -401,8 +355,7 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="City"
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.address?.city ? "border-red-500" : "border-green-500")
+                  errors.address?.city ? "border-red-500" : "border-green-500"
                 }`}
               />
               {errors.address?.city && (
@@ -416,10 +369,9 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="ZIP Code"
                 className={`border ${
-                  (styles.inputEmail,
                   errors.address?.zip_code
                     ? "border-red-500"
-                    : "border-green-500")
+                    : "border-green-500"
                 }`}
               />
               {errors.address?.zip_code && (
@@ -433,10 +385,9 @@ export default function RegisterModal() {
                 onChange={handleChange}
                 placeholder="Country"
                 className={`border ${
-                  (styles.inputEmail,
                   errors.address?.country
                     ? "border-red-500"
-                    : "border-green-500")
+                    : "border-green-500"
                 }`}
               />
               {errors.address?.country && (
@@ -449,8 +400,7 @@ export default function RegisterModal() {
                 value={user.roles}
                 onChange={handleChange}
                 className={`border ${
-                  (styles.inputEmail,
-                  errors.roles ? "border-red-500" : "border-green-500")
+                  errors.roles ? "border-red-500" : "border-green-500"
                 }`}>
                 {roles.map((role) => (
                   <option key={role.id} value={role.id}>
@@ -461,7 +411,7 @@ export default function RegisterModal() {
               {errors.roles && <p className="text-red-500">{errors.roles}</p>}
 
               <ReCAPTCHA
-                sitekey="your-site-key"
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                 onChange={(token: any) => setRecaptchaToken(token)}
               />
 
