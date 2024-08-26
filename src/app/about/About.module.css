@@ -1,0 +1,106 @@
+.button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    background-image: url('');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px;
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.ctaButton {
+    background-color: #28a745;
+    padding: 15px 30px;
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.story,
+.restaurants,
+.social {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.socialIcons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.socialIcons img {
+    width: 30px;
+}
+
+.footer {
+    background-color: #222;
+    color: white;
+    padding: 40px 20px;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footerLogo {
+    max-width: 100px;
+}
+
+.footer ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.footer ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.footerContact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footerContact a {
+    text-decoration: none;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+}

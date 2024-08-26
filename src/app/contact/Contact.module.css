@@ -1,0 +1,112 @@
+/* Contact Page Styles */
+.contactContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.contactTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.contactInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.contactDetails {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.contactDetails h2 {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.contactDetails p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.contactMap {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.contactForm {
+    margin-top: 40px;
+}
+
+.contactForm h2 {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.formGroup input,
+.formGroup textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.formGroup textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.submitBtn {
+    display: inline-block;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+    background-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contactInfo {
+        flex-direction: column;
+    }
+
+    .contactDetails,
+    .contactMap {
+        margin: 0 0 20px 0;
+    }
+
+    .contactTitle {
+        font-size: 2rem;
+    }
+
+    .contactForm h2 {
+        font-size: 1.5rem;
+    }
+}
