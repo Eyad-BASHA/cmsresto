@@ -16,7 +16,7 @@ export default function Dashboard() {
                 setUser(profile); 
             } catch (error) {
                 console.error('Failed to fetch user profile:', error);
-                router.push('/login'); 
+                router.push("/?login=true"); 
             }
         };
 
@@ -38,7 +38,6 @@ export default function Dashboard() {
             <p>Email: {user.email}</p>
             <p>Username: {user.username}</p>
             <p>Lastname: {user.last_name}</p>
-            <p>Lastname: {user.profile.phone_number}</p>
             <button onClick={handleLogout}>Logout</button>
         </div>
     );

@@ -14,19 +14,17 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-      const storedUser = localStorage.getItem("user");
-    //   console.log("Stored user in localStorage:", storedUser);
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
   }, []);
 
-    useEffect(() => {
-    //   console.log("Current user in context:", user);
+  useEffect(() => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
     } else {
-      localStorage.removeItem("user");
+      localStorage.removeItem("user"); 
     }
   }, [user]);
 

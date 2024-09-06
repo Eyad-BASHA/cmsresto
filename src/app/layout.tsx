@@ -1,17 +1,15 @@
+// src/app/layout.tsx
 "use client";
 
-import type { Metadata } from "next";
 import { useEffect } from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Layout from "./components/Layout";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "CMSRESTO",
-  description: "CMS pour les Restaurants",
-};
+
 
 export default function RootLayout({
   children,
@@ -21,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${inter.className} w-full`}>
-        <Layout>{children}</Layout>
+        <Layout>
+          {children}
+          <SpeedInsights />
+        </Layout>
       </body>
     </html>
   );

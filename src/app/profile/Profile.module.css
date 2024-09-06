@@ -1,93 +1,82 @@
-/* body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-} */
-
-/* :global(body) {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-} */
-
-.profile-container {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 600px;
-    max-width: 90%;
+.profileContainer {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
-.profile-header h1 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
+.profileHeader {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.profile-content {
-    margin-top: 20px;
+.profileHeader h1 {
+  font-size: 28px;
+  color: #333;
 }
 
-.profile-section {
-    margin-bottom: 20px;
+.profileContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.profile-section h2 {
-    font-size: 1.5rem;
-    color: #00C3A9;
-    margin-bottom: 10px;
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.profile-section p {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 8px;
+.profileSection {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
-.profile-section p strong {
-    color: #00C3A9;
+.profileSection h2 {
+  font-size: 22px;
+  color: #555;
+  margin-bottom: 10px;
 }
 
-.logout-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #FF4B4B;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+.profileSection p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 8px;
 }
 
-.logout-btn:hover {
-    background-color: #e63b3b;
+.avatarContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-@media (max-width: 500px) {
-    .profile-container {
-        padding: 20px;
-        width: 90%;
-    }
+.avatar {
+  border-radius: 50%;
+  border: 3px solid #007bff;
+}
 
-    .profile-header h1 {
-        font-size: 1.5rem;
-    }
+.logoutBtn {
+  width: 100%;
+  padding: 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
 
-    .logout-btn {
-        font-size: 0.9rem;
-    }
+.logoutBtn:hover {
+  background-color: #c82333;
+}
+
+.loading {
+  text-align: center;
+  font-size: 20px;
+  color: #007bff;
 }

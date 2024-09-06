@@ -136,3 +136,18 @@
         display: block;
     }
 }
+
+.forgotPasswordButton {
+  /* background: none;
+  border: none; */
+  /* color: #007bff; */
+  /* cursor: pointer;
+  text-decoration: underline;
+  margin-top: 15px; */
+    background-color: #dbd538;
+    color: #ffffff;
+}
+
+.forgotPasswordButton:hover {
+  color: #0056b3;
+}

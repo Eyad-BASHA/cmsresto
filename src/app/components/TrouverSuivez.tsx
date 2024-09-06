@@ -23,7 +23,7 @@ function TrouverSuivez() {
             <Image
               src="/homeImages/tr-n_01.jpg"
               alt="Restaurant 1"
-              layout="responsive"
+              // layout="fill"
               width={500}
               height={300}
               className={`${styles.restaurantImage} mt-24`}
@@ -31,7 +31,7 @@ function TrouverSuivez() {
             <Image
               src="/homeImages/tr-n_02.jpg"
               alt="Restaurant 2"
-              layout="responsive"
+              // layout="fill"
               width={500}
               height={300}
               className={styles.restaurantImage}
@@ -53,7 +53,7 @@ function TrouverSuivez() {
             <a href="https://twitter.com" className={styles.socialLink}>
               <Image
                 src="/reseau/twitter-circled.svg"
-                layout="responsive"
+                // layout="fill"
                 width={30}
                 height={30}
                 alt="Twitter"
@@ -62,7 +62,7 @@ function TrouverSuivez() {
             <a href="https://facebook.com" className={styles.socialLink}>
               <Image
                 src="/reseau/facebook.svg"
-                layout="responsive"
+                // layout="fill"
                 width={30}
                 height={30}
                 alt="Facebook"
@@ -71,7 +71,7 @@ function TrouverSuivez() {
             <a href="https://youtube.com" className={styles.socialLink}>
               <Image
                 src="/reseau/youtube-music.svg"
-                layout="responsive"
+                // layout="fill"
                 width={30}
                 height={30}
                 alt="YouTube"
@@ -80,7 +80,7 @@ function TrouverSuivez() {
             <a href="https://instagram.com" className={styles.socialLink}>
               <Image
                 src="/reseau/instagram.svg"
-                layout="responsive"
+                // layout="fill"
                 width={30}
                 height={30}
                 alt="Instagram"
@@ -93,7 +93,7 @@ function TrouverSuivez() {
             src="/homeImages/galerie_01.jpg"
             alt="galerie 1"
             className={styles.followImage}
-            layout="responsive"
+            // layout="fill"
             width={500}
             height={500}
           />
@@ -101,7 +101,7 @@ function TrouverSuivez() {
             src="/homeImages/galerie_02.jpg"
             alt="galerie 2"
             className={styles.followImage}
-            layout="responsive"
+            // layout="fill"
             width={500}
             height={500}
           />
@@ -109,7 +109,7 @@ function TrouverSuivez() {
             src="/homeImages/galerie_03.jpg"
             alt="galerie 3"
             className={styles.followImage}
-            layout="responsive"
+            // layout="fill"
             width={500}
             height={500}
           />
@@ -117,7 +117,7 @@ function TrouverSuivez() {
             src="/homeImages/galerie_04.jpg"
             alt="galerie 4"
             className={styles.followImage}
-            layout="responsive"
+            // layout="fill"
             width={500}
             height={500}
           />
@@ -125,7 +125,7 @@ function TrouverSuivez() {
             src="/homeImages/galerie_05.jpg"
             alt="galerie 5"
             className={styles.followImage}
-            layout="responsive"
+            // layout="fill"
             width={500}
             height={500}
           />
@@ -133,7 +133,7 @@ function TrouverSuivez() {
             src="/homeImages/galerie_06.jpg"
             alt="galerie 6"
             className={styles.followImage}
-            layout="responsive"
+            // layout="fill"
             width={500}
             height={500}
           />
@@ -141,7 +141,7 @@ function TrouverSuivez() {
             src="/homeImages/galerie_07.jpg"
             alt="galerie 7"
             className={styles.followImage}
-            layout="responsive"
+            // layout="fill"
             width={500}
             height={500}
           />
@@ -149,7 +149,7 @@ function TrouverSuivez() {
             src="/homeImages/galerie_08.jpg"
             alt="galerie 8"
             className={styles.followImage}
-            layout="responsive"
+            // layout="fill"
             width={500}
             height={500}
           />
@@ -157,7 +157,7 @@ function TrouverSuivez() {
             src="/homeImages/galerie_09.jpg"
             alt="galerie 9"
             className={styles.followImage}
-            layout="responsive"
+            // layout="fill"
             width={500}
             height={500}
           />

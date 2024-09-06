@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
               src="/logo-footer.png"
               alt="CMS Restaurant Logo"
               className={styles.footerLogoImage}
-              layout="responsive"
+              // layout="fill"
               width={150}
               height={150}
             />
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
         </div>
         <div className={styles.footerContactSection}>
           <div className={styles.footerBtnContainer} >
-            <a href="/order" className={styles.orderButton}>
+            <a href="/menu" className={styles.orderButton}>
               Commander en ligne
             </a>
             <a href="/reservation" className={styles.reserveButton}>

@@ -1,7 +1,8 @@
 import { useRouter } from 'next/navigation';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
 export async function login(emailOrUsername, password) {
-    const res = await fetch('http://localhost:8000/api/user/token/', {
+    const res = await fetch(`${siteUrl}/user/token/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -11,21 +12,20 @@ export async function login(emailOrUsername, password) {
 
     if (res.ok) {
         const data = await res.json();
-        // console.log('££££££££££££ : ', data); 
-        localStorage.setItem('token', data.token); // Utilise `data.token` pour stocker le token
+        localStorage.setItem('token', data.token); 
         return data;
     } else {
         throw new Error('Login failed');
     }
 }
 
-export async function register(username, email, password) {
-    const res = await fetch('http://localhost:8000/api/user/create/', {
+export async function register(dataToSend) {
+    const res = await fetch(`${siteUrl}/user/create/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify(dataToSend),
     });
 
     if (res.ok) {
@@ -43,7 +43,7 @@ export async function getUserProfile() {
         throw new Error('No token found');
     }
 
-    const res = await fetch('http://localhost:8000/api/user/me/', {
+    const res = await fetch(`${siteUrl}/user/me/`, {
         method: 'GET',
         headers: {
             'Authorization': `Token ${token}`, 
@@ -66,4 +66,5 @@ export async function getUserProfile() {
 
 export async function logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
 }

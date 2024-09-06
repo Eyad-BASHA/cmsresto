@@ -44,8 +44,8 @@ export interface UserProfile {
     last_name: string;
     profile: {
         phone_number: string;
-        addresses: Address;
         bio: string;
         profile_image: string;
+        addresses: Address[];
     };
 }

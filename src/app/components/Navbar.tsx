@@ -18,11 +18,21 @@ const Navbar: React.FC = () => {
    useEffect(() => {
      const storedUser = localStorage.getItem("user");
     //  console.log("Stored user:", storedUser);
-    //  console.log("Current user in context:", user);
+    //  console.log("Stored user in localStorage:", storedUser);
      if (storedUser && !user) {
        setUser(JSON.parse(storedUser));
      }
    }, [user, setUser]);
+  
+  
+  // useEffect(() => {
+    // console.log("Current user in context:", user);
+  //   if (user) {
+  //     localStorage.setItem("user", JSON.stringify(user));
+  //   } else {
+  //     localStorage.removeItem("user");
+  //   }
+  // }, [user]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -67,7 +77,7 @@ const Navbar: React.FC = () => {
               <Link href="/locations" className={linkClasses("/about")}>
                 Adresse
               </Link>
-              <Link href="/order" className={linkClasses("/about")}>
+              <Link href="/menu" className={linkClasses("/about")}>
                 Commander en ligne
               </Link>
             </div>
