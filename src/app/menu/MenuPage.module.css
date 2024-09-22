@@ -114,21 +114,18 @@
 @media (max-width: 1200px) {
     .itemsGrid {
         grid-template-columns: repeat(3, 1fr);
-        /* 3 columns on screens smaller than 1200px */
     }
 }
 
 @media (max-width: 900px) {
     .itemsGrid {
         grid-template-columns: repeat(2, 1fr);
-        /* 2 columns on screens smaller than 900px */
     }
 }
 
 @media (max-width: 600px) {
     .itemsGrid {
         grid-template-columns: 1fr;
-        /* 1 column on screens smaller than 600px */
     }
 }
 

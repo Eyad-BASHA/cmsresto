@@ -67,25 +67,25 @@ const Navbar: React.FC = () => {
                 </span>
               </Link>
             </div>
-            <div className="hidden md:flex items-center space-x-1">
+            <div className="hidden lg:flex items-center space-x-1">
               <Link href="/menu" className={linkClasses("/menu")}>
                 Notre Menu
               </Link>
               <Link href="/about" className={linkClasses("/about")}>
                 Qui sommes nous
               </Link>
-              <Link href="/locations" className={linkClasses("/about")}>
+              <Link href="/locations" className={linkClasses("/locations")}>
                 Adresse
               </Link>
-              <Link href="/menu" className={linkClasses("/about")}>
+              <Link href="/menu" className={linkClasses("/menu")}>
                 Commander en ligne
               </Link>
             </div>
           </div>
-          <div className="hidden md:flex items-center space-x-3">
+          <div className="hidden lg:flex items-center space-x-3">
             {user ? (
               <>
-              {user.username}
+                {user.username}
                 <Link href="/profile" className={linkClasses("/profile")}>
                   Profile
                 </Link>
@@ -98,16 +98,11 @@ const Navbar: React.FC = () => {
             ) : (
               <>
                 <LoginModal />
-                {/* <Link
-                  href="/auth/register"
-                  className="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">
-                  Sign Up
-                </Link> */}
                 <RegisterModal />
               </>
             )}
           </div>
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               className="outline-none mobile-menu-button"
               onClick={toggleMenu}>
@@ -134,17 +129,17 @@ const Navbar: React.FC = () => {
           </li>
           <li>
             <Link href="/menu" className={mobileLinkClasses("/menu")}>
-              Menu
+              Notre Menu
             </Link>
           </li>
           <li>
             <Link href="/about" className={mobileLinkClasses("/about")}>
-              About
+              Qui sommes nous
             </Link>
           </li>
           <li>
-            <Link href="/contact" className={mobileLinkClasses("/contact")}>
-              Contact
+            <Link href="/locations" className={mobileLinkClasses("/locations")}>
+              Adresse
             </Link>
           </li>
           {user ? (
